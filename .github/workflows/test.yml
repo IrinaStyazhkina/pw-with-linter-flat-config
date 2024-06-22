@@ -1,0 +1,23 @@
+name: Playwright tests
+
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  test:
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: SetUp
+        uses: ./.github/actions/setUp
+
+      - name: Install Chromium
+        run: npx playwright install chromium
+
+      - name: Run tests
+        run: npx playwright test
