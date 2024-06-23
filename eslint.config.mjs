@@ -9,7 +9,7 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   playwright.configs["flat/recommended"],
   {
-    ignores: ["node-modules"],
+    ignores: ["node-modules", "eslint"],
   },
   {
     languageOptions: {
@@ -19,14 +19,14 @@ export default tseslint.config(
       },
     },
   },
-  // {
-  //     files: ["tests/**/*{js,ts}"],
-  //     plugins: {
-  //         "custom-rules": customRules,
-  //     },
-  //     rules: {
-  //         "playwright/no-skipped-test": 0,
-  //         "custom-rules/skip-with-issue": ["error"],
-  //     }
-  // },
+  {
+    files: ["tests/**/*{js,ts}"],
+    plugins: {
+      "custom-rules": customRules,
+    },
+    rules: {
+      "playwright/no-skipped-test": 0,
+      "custom-rules/skip-with-issue": ["error"],
+    },
+  },
 );

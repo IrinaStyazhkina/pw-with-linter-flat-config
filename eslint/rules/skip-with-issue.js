@@ -7,6 +7,22 @@ module.exports = {
     schema: [], // no options
   },
   create: function (context) {
-    return {};
+    return {
+      MemberExpression(node) {
+        if (node.object.name === "test" && node.property.name === "skip") {
+          const hasIssue = context.sourceCode
+            .getCommentsBefore(node)
+            .some((comment) =>
+              comment.value.includes("http://jira.com/ISSUE-"),
+            );
+          if (!hasIssue) {
+            context.report({
+              node,
+              message: "Provide Jira link for issue",
+            });
+          }
+        }
+      },
+    };
   },
 };
